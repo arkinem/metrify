@@ -1,18 +1,19 @@
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import { createAppContainer } from "react-navigation";
-import MainScreen from "../screens/MainScreen";
-import OtherScreen from "../screens/OtherScreen";
+import LookupScreen from "../screens/LookupScreen";
+import HistoryScreen from "../screens/HistoryScreen";
+import { PaperTheme } from "../config";
 
 const TabNavigator = createMaterialBottomTabNavigator(
   {
-    Main: { screen: MainScreen },
-    Other: { screen: OtherScreen }
+    Lookup: { screen: LookupScreen },
+    History: { screen: HistoryScreen }
   },
   {
-    initialRouteName: "Other",
-    activeColor: "#f0edf6",
-    inactiveColor: "#3e2466",
-    barStyle: { backgroundColor: "#694fad" }
+    initialRouteName: "Lookup",
+    activeColor: PaperTheme.colors.primary,
+    inactiveColor: PaperTheme.colors.text + "5A",
+    barStyle: { backgroundColor: PaperTheme.colors.surface }
   }
 );
 
