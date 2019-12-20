@@ -1,5 +1,7 @@
 import { AppRegistry } from "react-native";
-import App from "./App";
 import { name as appName } from "./app.json";
+import Analytics from "appcenter-analytics";
+import MainScreen from "./src/screens/MainScreen.js";
 
-AppRegistry.registerComponent(appName, () => App);
+Analytics.trackEvent("Metrify App opened");
+AppRegistry.registerComponent(appName, () => MainScreen);
