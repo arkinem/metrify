@@ -14,4 +14,5 @@ const App = () => (
     <AppNavigator />
   </PaperProvider>
 );
+
 AppRegistry.registerComponent(appName, () => App);

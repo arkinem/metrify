@@ -3,19 +3,20 @@ import styled from "styled-components/native";
 import StatusBar from "./StatusBar";
 import { withTheme } from "react-native-paper";
 
-const ScreenContainer = ({ children, theme }) => {
-  const Container = styled.View`
-    flex: 1;
-    background: ${theme.colors.background};
-    padding: 0 16px;
-  `;
+class ScreenContainer extends React.Component {
+  // shouldComponentUpdate = () => false;
 
-  return (
-    <>
-      <StatusBar />
-      <Container>{children}</Container>
-    </>
-  );
-};
+  render() {
+    const { theme, children } = this.props;
+   
+
+    return (
+      <>
+       
+        <Container>{children}</Container>
+      </>
+    );
+  }
+}
 
 export default withTheme(ScreenContainer);
