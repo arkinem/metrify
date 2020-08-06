@@ -1,6 +1,5 @@
 import * as React from "react";
 import styled from "styled-components/native";
-import Constants from "expo-constants";
 import { Feather } from "@expo/vector-icons";
 import { useIsDrawerOpen } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
@@ -29,7 +28,6 @@ const Container = styled.View`
   flex-direction: row;
   align-items: center;
   padding: 0 20px;
-  margin-top: ${Constants.statusBarHeight}px;
 `;
 
 const DrawerButton = styled.TouchableOpacity`

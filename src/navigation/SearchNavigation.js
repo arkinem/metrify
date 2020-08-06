@@ -2,19 +2,28 @@ import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import SearchScreen from "../screens/search/SearchScreen";
 import SearchResultsScreen from "../screens/search/SearchResultsScreen";
+import AddressModal from "../components/AddressModal";
 
-const Stack = createStackNavigator();
+const MainStack = createStackNavigator();
+const RootStack = createStackNavigator();
 
-export default function SearchNavigation() {
+export default function RootStackScreen() {
   return (
-    <Stack.Navigator
+    <RootStack.Navigator screenOptions={{ headerShown: false }} mode="modal">
+      <RootStack.Screen name="Main" component={SearchNavigation} />
+      <RootStack.Screen name="MyModal" component={AddressModal} />
+    </RootStack.Navigator>
+  );
+}
+
+function SearchNavigation() {
+  return (
+    <MainStack.Navigator
       initialRouteName="Search"
-      screenOptions={{
-        headerShown: false,
-      }}
+      screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen name="Search" component={SearchScreen} />
-      <Stack.Screen name="Results" component={SearchResultsScreen} />
-    </Stack.Navigator>
+      <MainStack.Screen name="Search" component={SearchScreen} />
+      <MainStack.Screen name="Results" component={SearchResultsScreen} />
+    </MainStack.Navigator>
   );
 }

@@ -1,8 +1,8 @@
 import * as React from "react";
 import styled from "styled-components/native";
-import { Button, TouchableOpacity } from "react-native";
+import { Button } from "react-native";
 import Header from "../../components/Header";
-import { AntDesign } from "@expo/vector-icons";
+import CloseButton from "../../components/CloseButton";
 
 export default function SearchResultsScreen({ navigation }) {
   return (
@@ -10,9 +10,7 @@ export default function SearchResultsScreen({ navigation }) {
       <Header
         title="Your report"
         rightButton={
-          <TouchableOpacity onPress={() => navigation.navigate("Search")}>
-            <AntDesign name="close" size={40} color="black" />
-          </TouchableOpacity>
+          <CloseButton onPress={() => navigation.navigate("Search")} />
         }
       />
       <Container>
