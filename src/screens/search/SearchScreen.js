@@ -1,13 +1,15 @@
 import * as React from "react";
-import { Button, View } from "react-native";
+// import styled from "styled-components/native";
+import { Button } from "react-native";
+import Screen from "../../components/Screen";
 
 export default function SearchScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <Screen title={"Search"}>
       <Button
         onPress={() => navigation.navigate("Results")}
         title="Go to results"
       />
-    </View>
+    </Screen>
   );
 }

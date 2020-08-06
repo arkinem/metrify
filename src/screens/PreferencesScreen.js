@@ -1,10 +1,11 @@
 import * as React from "react";
-import { Button, View } from "react-native";
+import { Button } from "react-native";
+import Screen from "../components/Screen";
 
 export default function PreferencesScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <Screen title="Preferences">
       <Button onPress={() => navigation.goBack()} title="Go back to search" />
-    </View>
+    </Screen>
   );
 }

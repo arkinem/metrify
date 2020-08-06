@@ -7,7 +7,12 @@ const Stack = createStackNavigator();
 
 export default function SearchNavigation() {
   return (
-    <Stack.Navigator initialRouteName="Search">
+    <Stack.Navigator
+      initialRouteName="Search"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Screen name="Search" component={SearchScreen} />
       <Stack.Screen name="Results" component={SearchResultsScreen} />
     </Stack.Navigator>
