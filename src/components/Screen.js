@@ -39,8 +39,6 @@ export default function Screen({
         <ContentScrollView
           noBackground={noBackground}
           contentContainerStyle={{
-            alignItems: "center",
-            justifyContent: "center",
             paddingHorizontal: 20,
             paddingVertical: 15,
           }}
@@ -59,12 +57,14 @@ const Container = styled.SafeAreaView`
 
 const ContentView = styled.View`
   flex: 1;
+  margin-top: ${({ noBackground }) => (noBackground ? 0 : -60)}px;
   background-color: ${({ noBackground }) =>
     noBackground ? "white" : "#51346F"};
 `;
 
 const ContentScrollView = styled.ScrollView`
   flex: 1;
+  margin-top: ${({ noBackground }) => (noBackground ? 0 : -60)}px;
   background-color: ${({ noBackground }) =>
     noBackground ? "white" : "#51346F"};
 `;

@@ -11,7 +11,7 @@ export default function RootStackScreen() {
   return (
     <RootStack.Navigator screenOptions={{ headerShown: false }} mode="modal">
       <RootStack.Screen name="Main" component={SearchNavigation} />
-      <RootStack.Screen name="MyModal" component={AddressModal} />
+      <RootStack.Screen name="AddressModal" component={AddressModal} />
     </RootStack.Navigator>
   );
 }

@@ -8,15 +8,14 @@ export const getPlacesAutoComplete = async (input) => {
   const url = `${baseUrl}/autocomplete/json`;
 
   try {
-    console.log(url);
     const { data } = await axios.get(url, {
       params: {
         key: googleApiKey,
         input,
       },
     });
-    console.log(data, url);
-    return data;
+
+    return data?.predictions || [];
   } catch (error) {
     console.log(error);
   }

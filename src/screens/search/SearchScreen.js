@@ -1,24 +1,34 @@
 import React, { useState } from "react";
-// import styled from "styled-components/native";
-import { Button } from "react-native";
+import styled from "styled-components/native";
 import Screen from "../../components/Screen";
-import { Input, Text } from "@ui-kitten/components";
+import { Text } from "@ui-kitten/components";
+import useLocation from "../../hooks/useLocation";
 
 export default function SearchScreen({ navigation }) {
-  const [value, setValue] = useState("");
-
+  const { location } = useLocation();
+  console.log(location, "location");
   return (
     <Screen title={"Search"}>
-      <Text category="h4">Addres you'd like to check</Text>
-      <Input
-        placeholder="Place your Text"
-        value={value}
-        onChangeText={(nextValue) => setValue(nextValue)}
-      />
-      <Button
-        onPress={() => navigation.navigate("MyModal")}
-        title="Go to results"
-      />
+      <InputTitle category="h4">Property address</InputTitle>
+      <Input onPress={() => navigation.navigate("AddressModal")}>
+        <AddressText>{location?.description || "Press to select"}</AddressText>
+      </Input>
     </Screen>
   );
 }
+
+const InputTitle = styled(Text)`
+  color: white;
+  margin-bottom: 20px;
+`;
+
+const Input = styled.TouchableOpacity`
+  background: #8965a8;
+  color: white;
+  border-radius: 4px;
+  padding: 10px 16px;
+`;
+
+const AddressText = styled(Text)`
+  color: white;
+`;

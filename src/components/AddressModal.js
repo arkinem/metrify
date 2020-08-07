@@ -6,11 +6,13 @@ import useDebounce from "../hooks/useDebounce";
 import { getPlacesAutoComplete } from "../service/places";
 import { AntDesign } from "@expo/vector-icons";
 import { t } from "../i18n/helpers";
+import useLocation from "../hooks/useLocation";
 
 export default function AddressModal({ navigation }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
+  const { setLocation, location } = useLocation();
 
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
   useEffect(() => {
@@ -30,10 +32,15 @@ export default function AddressModal({ navigation }) {
 
   const renderItem = ({ item }) => {
     const { structured_formatting: location } = item;
+
     return (
       <ListItem
         title={location?.main_text}
         description={location?.secondary_text}
+        onPress={() => {
+          setLocation(item);
+          navigation.goBack();
+        }}
       />
     );
   };
@@ -54,7 +61,7 @@ export default function AddressModal({ navigation }) {
         />
       </Heading>
       <ResultsList
-        data={results.predictions}
+        data={results}
         ItemSeparatorComponent={Divider}
         renderItem={renderItem}
       />
