@@ -1,34 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components/native";
 import Screen from "../../components/Screen";
 import { Text } from "@ui-kitten/components";
 import useLocation from "../../hooks/useLocation";
+import theme from "../../constants/theme";
 
 export default function SearchScreen({ navigation }) {
-  const { location } = useLocation();
-  console.log(location, "location");
-  return (
-    <Screen title={"Search"}>
-      <InputTitle category="h4">Property address</InputTitle>
-      <Input onPress={() => navigation.navigate("AddressModal")}>
-        <AddressText>{location?.description || "Press to select"}</AddressText>
-      </Input>
-    </Screen>
-  );
+	const { location } = useLocation();
+	console.log(location, "location");
+	return (
+		<Screen title={"Metrify"}>
+			<Heading category="h4">Property address</Heading>
+			<Input onPress={() => navigation.navigate("AddressModal")}>
+				<AddressText>{location?.description || "Tap to select"}</AddressText>
+			</Input>
+			<Heading category="h4">Options</Heading>
+		</Screen>
+	);
 }
 
-const InputTitle = styled(Text)`
-  color: white;
-  margin-bottom: 20px;
+const Heading = styled(Text)`
+	margin-bottom: 10px;
+	color: ${theme.colors.textLight};
+	font-family: ${theme.fonts.heading};
 `;
 
 const Input = styled.TouchableOpacity`
-  background: #8965a8;
-  color: white;
-  border-radius: 4px;
-  padding: 10px 16px;
+	padding: 10px 16px;
+	margin-bottom: 20px;
+	border-radius: 4px;
+	background: ${theme.colors.primaryLight};
+	color: ${theme.colors.textLight};
 `;
 
 const AddressText = styled(Text)`
-  color: white;
+	color: ${theme.colors.textLight};
+	font-family: ${theme.fonts.regular};
 `;
