@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components/native";
-import Close from "./CloseButton";
 import Screen from "./Screen";
-import { Input } from "@ui-kitten/components";
+import { Input, Divider, List, ListItem, Text } from "@ui-kitten/components";
 import useDebounce from "../hooks/useDebounce";
+import { getPlacesAutoComplete } from "../service/places";
+import { AntDesign } from "@expo/vector-icons";
+import { t } from "../i18n/helpers";
 
 export default function AddressModal({ navigation }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -14,7 +16,7 @@ export default function AddressModal({ navigation }) {
   useEffect(() => {
     async function fetchData() {
       setIsSearching(true);
-      const results = await searchCharacters(debouncedSearchTerm);
+      const results = await getPlacesAutoComplete(debouncedSearchTerm);
       setResults(results);
       setIsSearching(false);
     }
@@ -26,39 +28,55 @@ export default function AddressModal({ navigation }) {
     }
   }, [debouncedSearchTerm]);
 
+  const renderItem = ({ item }) => {
+    const { structured_formatting: location } = item;
+    return (
+      <ListItem
+        title={location?.main_text}
+        description={location?.secondary_text}
+      />
+    );
+  };
+
   return (
-    <Screen noBackground>
+    <Screen plainView noBackground>
       <Heading>
+        <BackButton onPress={() => navigation.goBack()}>
+          <AntDesign name="arrowleft" size={40} color="black" />
+        </BackButton>
+        <Title category="h4">{t("addressModal.inputTitle")}</Title>
         <Input
+          autoFocus
           size="large"
-          placeholder="Type localization here"
+          placeholder={t("addressModal.inputPlaceholder")}
           value={searchTerm}
           onChangeText={setSearchTerm}
         />
-        <CloseButton onPress={() => navigation.goBack()} />
       </Heading>
+      <ResultsList
+        data={results.predictions}
+        ItemSeparatorComponent={Divider}
+        renderItem={renderItem}
+      />
     </Screen>
   );
 }
 
 const Heading = styled.View`
-  flex-direction: row;
-  height: 70px;
+  flex-direction: column;
   width: 100%;
-  align-items: center;
+  padding-top: 50px;
 `;
 
-const CloseButton = styled(Close)`
-  margin-left: auto;
+const BackButton = styled.TouchableOpacity`
+  position: absolute;
+  left: 0;
 `;
 
-// API search function
-async function searchCharacters(search) {
-  console.log("request", new Date());
-  await sleep(300);
-  return { text: "hehe" };
-}
+const ResultsList = styled(List)`
+  background: white;
+`;
 
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+const Title = styled(Text)`
+  margin-bottom: 20px;
+`;
