@@ -39,6 +39,7 @@ const DrawerButton = styled.TouchableOpacity`
 `;
 
 const Title = styled(Text)`
+	margin-top: 8px;
 	font-family: ${theme.fonts.heading};
 `;
 
