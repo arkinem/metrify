@@ -11,7 +11,7 @@ import theme from "../constants/theme";
 
 export default function AddressModal({ navigation }) {
 	const [searchTerm, setSearchTerm] = useState("");
-	const [results, setResults] = useState([]);
+	const [results, setResults] = useState(null);
 	const [isSearching, setIsSearching] = useState(false);
 	const { setLocation, location } = useLocation();
 
@@ -27,7 +27,7 @@ export default function AddressModal({ navigation }) {
 		if (debouncedSearchTerm.length > 2) {
 			fetchData();
 		} else {
-			setResults([]);
+			setResults(null);
 		}
 	}, [debouncedSearchTerm]);
 
@@ -62,12 +62,11 @@ export default function AddressModal({ navigation }) {
 					textStyle={{ fontFamily: theme.fonts.regular }}
 				/>
 			</Heading>
-			<ResultsList
-				style={{ fontFamily: theme.fonts.title }}
-				data={results}
-				ItemSeparatorComponent={Divider}
-				renderItem={renderItem}
-			/>
+			{results !== null && results.length === 0 ? (
+				<EmptyMessage>{t("addressModal.emptyList")}</EmptyMessage>
+			) : (
+				<ResultsList data={results} ItemSeparatorComponent={Divider} renderItem={renderItem} />
+			)}
 		</Screen>
 	);
 }
@@ -100,4 +99,12 @@ const ListItemDescription = styled(Text)`
 	color: ${theme.colors.textSemiDark};
 	font-size: 13px;
 	font-family: ${theme.fonts.regular};
+`;
+
+const EmptyMessage = styled(Text)`
+	color: ${theme.colors.textSemiDark};
+	width: 100%;
+	text-align: center;
+	font-family: ${theme.fonts.regular};
+	margin-top: 60px;
 `;
