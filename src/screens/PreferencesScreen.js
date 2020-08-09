@@ -1,11 +1,14 @@
 import * as React from "react";
-import { Button } from "react-native";
 import Screen from "../components/Screen";
+import { Text } from "@ui-kitten/components";
 
 export default function PreferencesScreen({ navigation }) {
-  return (
-    <Screen title="Preferences">
-      <Button onPress={() => navigation.goBack()} title="Go back to search" />
-    </Screen>
-  );
+	return (
+		<Screen title="Preferences">
+			<Text>
+				Changes here won't have an effect on the current search, but will be used as your defaults
+				for future searches.
+			</Text>
+		</Screen>
+	);
 }
