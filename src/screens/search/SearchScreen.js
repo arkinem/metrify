@@ -2,57 +2,60 @@ import React, { useState } from "react";
 import styled from "styled-components/native";
 import Screen from "../../components/Screen";
 import { Text, Toggle } from "@ui-kitten/components";
-import useLocation from "../../hooks/useLocation";
 import theme from "../../constants/theme";
 import { Feather } from "@expo/vector-icons";
 import logo from "../../../assets/transparent-logo.png";
+import TextHeading from "../../components/TextHeading";
+import useReportForm from "../../hooks/useReportForm";
 
 export default function SearchScreen({ navigation }) {
-	const { location, setLocation } = useLocation();
-	const [includeCrimeData, setIncludeCrimeData] = useState(true);
-	const [includeAirQualityData, setIncludeAirQualityData] = useState(true);
-	const [includeAveragePrices, setIncludeAveragePrices] = useState(true);
+	const form = useReportForm();
 	const [imageContainerSize, setImageContainerSize] = useState({ height: 0, width: 0 });
 
-	console.log(location, "location");
+	const onSubmit = () => {
+		console.log(form);
+	};
+
 	return (
 		<Screen title={"Check location"}>
-			<Heading category="h4">Property address</Heading>
+			<TextHeading>Property address</TextHeading>
 			<Input>
 				<AddressButton onPress={() => navigation.navigate("AddressModal")}>
-					<LightText>{location?.description || "Tap to select"}</LightText>
+					<LightText>{form.location?.description || "Tap to select"}</LightText>
 				</AddressButton>
-				{location && (
-					<ClearButton onPress={() => setLocation(null)}>
+				{form.location && (
+					<ClearButton onPress={() => form.setLocation(null)}>
 						<Feather name={"x-circle"} size={26} color={theme.colors.textLight} />
 					</ClearButton>
 				)}
 			</Input>
 
-			<Heading category="h4">Options</Heading>
+			<TextHeading>Options</TextHeading>
 			<OptionsContainer>
-				<ToggleButton status={"warning"} checked={includeCrimeData} onChange={setIncludeCrimeData}>
+				<ToggleButton
+					status={"warning"}
+					checked={form.includeCrimeData}
+					onChange={form.setIncludeCrimeData}
+				>
 					<LightText>Analyze crime data</LightText>
 				</ToggleButton>
 				<ToggleButton
 					status={"warning"}
-					checked={includeAirQualityData}
-					onChange={setIncludeAirQualityData}
+					checked={form.includeAirQualityData}
+					onChange={form.setIncludeAirQualityData}
 				>
 					<LightText>Air quiality data</LightText>
 				</ToggleButton>
 				<ToggleButton
 					status={"warning"}
-					checked={includeAveragePrices}
-					onChange={setIncludeAveragePrices}
+					checked={form.includeAveragePrices}
+					onChange={form.setIncludeAveragePrices}
 				>
 					<LightText>Include average prices information</LightText>
 				</ToggleButton>
 			</OptionsContainer>
-			<SubmitButton activeOpacity={0.75} onPress={() => console.log("ee")}>
-				<Heading category="h2" noMargin>
-					Get report
-				</Heading>
+			<SubmitButton activeOpacity={0.75} onPress={onSubmit}>
+				<TextHeading noMargin>Get report</TextHeading>
 			</SubmitButton>
 			<LogoContainer
 				onLayout={(e) => {
@@ -65,12 +68,6 @@ export default function SearchScreen({ navigation }) {
 		</Screen>
 	);
 }
-
-const Heading = styled(Text)`
-	margin-bottom: ${({ noMargin }) => (noMargin ? 0 : 10)}px;
-	color: ${theme.colors.textLight};
-	font-family: ${theme.fonts.heading};
-`;
 
 const Input = styled.TouchableOpacity`
 	flex-direction: row;
