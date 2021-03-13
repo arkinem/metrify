@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "metrify-service.herokuapp.com/api";
+const baseUrl = "https://metrify-service.herokuapp.com/api";
 
 export const getReport = async (
 	lat,
@@ -13,6 +13,14 @@ export const getReport = async (
 	const url = `${baseUrl}/v1/report`;
 
 	try {
+		console.log(url, {
+			lat,
+			lng,
+			locationDescription,
+			crimeData,
+			airQualityData,
+			averagePrices,
+		});
 		const { data } = await axios.get(url, {
 			params: {
 				lat,
@@ -23,9 +31,8 @@ export const getReport = async (
 				averagePrices,
 			},
 		});
-
 		return data;
 	} catch (error) {
-		console.log(error);
+		console.log(error.request);
 	}
 };

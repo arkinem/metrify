@@ -7,13 +7,27 @@ import { Feather } from "@expo/vector-icons";
 import logo from "../../../assets/transparent-logo.png";
 import TextHeading from "../../components/TextHeading";
 import useReportForm from "../../hooks/useReportForm";
+import { getReport } from "../../services/report";
+import { addressToCoords } from "../../services/geocode";
 
 export default function SearchScreen({ navigation }) {
 	const form = useReportForm();
 	const [imageContainerSize, setImageContainerSize] = useState({ height: 0, width: 0 });
 
-	const onSubmit = () => {
-		console.log(form);
+	const onSubmit = async () => {
+		try {
+			const address = form.location?.description;
+			const coords = await addressToCoords(address);
+			const { lat, lng } = coords?.results[0]?.geometry?.location;
+			if (lat && lng) {
+				const response = await getReport(lat, lng);
+				console.log(response);
+			} else {
+				//Error here?
+			}
+		} catch (e) {
+			console.log("onSubmit", e);
+		}
 	};
 
 	return (
