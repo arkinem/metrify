@@ -1,7 +1,7 @@
 import axios from "axios";
 import getEnvVariables from "../../environment";
 
-const baseUrl = "https://maps.googleapis.com/maps/api/place";
+const baseUrl = "https://maps.googleapis.com/maps/api";
 const { googleApiKey } = getEnvVariables();
 
 const isUkLocation = (location) => {
@@ -9,7 +9,7 @@ const isUkLocation = (location) => {
 };
 
 export const getPlacesAutoComplete = async (input) => {
-	const url = `${baseUrl}/autocomplete/json`;
+	const url = `${baseUrl}/place/autocomplete/json`;
 
 	try {
 		const { data } = await axios.get(url, {

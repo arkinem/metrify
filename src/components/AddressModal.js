@@ -3,17 +3,17 @@ import styled from "styled-components/native";
 import Screen from "./Screen";
 import { Input, Divider, List, ListItem, Text } from "@ui-kitten/components";
 import useDebounce from "../hooks/useDebounce";
-import { getPlacesAutoComplete } from "../service/places";
+import { getPlacesAutoComplete } from "../services/places";
 import { AntDesign } from "@expo/vector-icons";
-import { t } from "../i18n/helpers";
-import useLocation from "../hooks/useLocation";
+import { t } from "../lib/i18n/helpers";
+import useReportForm from "../hooks/useReportForm";
 import theme from "../constants/theme";
 
 export default function AddressModal({ navigation }) {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [results, setResults] = useState(null);
 	const [isSearching, setIsSearching] = useState(false);
-	const { setLocation, location } = useLocation();
+	const { setLocation } = useReportForm();
 
 	const debouncedSearchTerm = useDebounce(searchTerm, 500);
 	useEffect(() => {

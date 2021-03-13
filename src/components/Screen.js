@@ -36,6 +36,7 @@ export default function Screen({ title, headerProps, children, noBackground, pla
 					contentContainerStyle={{
 						paddingHorizontal: 20,
 						paddingVertical: 15,
+						flex: 1,
 					}}
 				>
 					{children}
