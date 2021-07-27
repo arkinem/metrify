@@ -5,19 +5,7 @@ import styled from "styled-components/native";
 import theme from "../../constants/theme";
 
 const Card = ({ children, ...props }) => (
-	<Container
-		style={{
-			shadowColor: "#000",
-			shadowOffset: {
-				width: 0,
-				height: 2,
-			},
-			shadowOpacity: 0.25,
-			shadowRadius: 4,
-			elevation: 5,
-		}}
-		{...props}
-	>
+	<Container style={theme.shadow} {...props}>
 		{children}
 	</Container>
 );

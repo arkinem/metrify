@@ -10,6 +10,10 @@ import CardTitle from "./CardTitle";
 import LabeledValue from "./LabeledValue";
 
 const DemographicsCard = ({ demographics }) => {
+	if (!demographics?.data) {
+		return null;
+	}
+
 	const window = useWindowDimensions();
 	const { age, proportion_with_degree, vehicles_per_household, commute_method, politics } =
 		demographics.data;

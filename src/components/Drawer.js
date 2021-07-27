@@ -29,7 +29,11 @@ const Drawer = ({ state, navigation, ...props }) => {
 		<DrawerContentScrollView state={state} navigation={navigation} {...props}>
 			<Container>
 				<DrawerItem name="Search" iconName={"search"} navigationPath={screens.SEARCH} />
-				<DrawerItem name="Reports" iconName={"file-text"} navigationPath={screens.REPORTS} />
+				<DrawerItem
+					name="Reports"
+					iconName={"file-text"}
+					navigationPath={screens.REPORTS_NAVIGATION}
+				/>
 				<DrawerItem name="Preferences" iconName={"settings"} navigationPath={screens.PREFERENCES} />
 			</Container>
 		</DrawerContentScrollView>

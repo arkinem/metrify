@@ -83,4 +83,12 @@ export default {
 	"report.restaurants.all": "View all",
 	"report.restaurants.modal.title": "Restaurants nearby",
 	"report.restaurants.modal.close": "Close",
+	"reportsScreen.title": "Reports",
+	"reportsScreen.empty":
+		"It's empty here. Your past reports will be accessible once you perform search.",
+	"reportsScreen.clearAll": "Clear all",
+	"confirmModal.title": "Are you sure?",
+	"confirmModal.subtitle": "This action is irreversible.",
+	"confirmModal.close": "Close",
+	"confirmModal.confirm": "Confirm",
 };

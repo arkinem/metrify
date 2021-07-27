@@ -11,6 +11,10 @@ import LabeledValue from "./LabeledValue";
 import RestaurantsModal from "./RestaurantsModal";
 
 const RestaurantsCard = ({ restaurants }) => {
+	if (!restaurants?.data) {
+		return null;
+	}
+
 	const { average_hygiene, rating, nearby } = restaurants.data;
 	const [restaurantsModalOpen, setRestaurantsModalOpen] = useState(false);
 

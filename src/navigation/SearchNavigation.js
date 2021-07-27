@@ -16,7 +16,7 @@ const SearchNavigation = () => {
 		<Navigator screenOptions={{ headerShown: false }} mode="modal">
 			<Screen name={screens.SEARCH} component={SearchScreen} />
 			<Screen name={screens.SEARCH_RESULT_NAVIGATION} component={ResultNavigation} />
-			<Screen name="AddressModal" component={AddressModal} />
+			<Screen name={screens.ADDRESS_MODAL} component={AddressModal} />
 		</Navigator>
 	);
 };

@@ -6,6 +6,10 @@ import CardTitle from "./CardTitle";
 import LabeledValue from "./LabeledValue";
 
 const AirQualityCard = ({ airQuality }) => {
+	if (!airQuality?.data) {
+		return null;
+	}
+
 	const { weather, pollution } = airQuality.data.current;
 
 	const aqi = parseInt(pollution.aqius);

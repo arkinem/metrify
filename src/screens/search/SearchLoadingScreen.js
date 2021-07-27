@@ -11,11 +11,13 @@ import { t } from "../../lib/i18n/helpers";
 import { addressToCoords } from "../../services/geocode";
 import { findPostcode } from "../../services/postcode";
 import { getReport } from "../../services/report";
+import useReports from "../../hooks/useReports";
 
 const SearchLoadingScreen = ({ navigation, route }) => {
 	const { address } = route.params;
 	const [loading, setLoading] = useState(false);
 	const [isError, setIsError] = useState(false);
+	const { reports, saveReport } = useReports();
 
 	useEffect(() => {
 		const fetchReport = async () => {
@@ -30,12 +32,16 @@ const SearchLoadingScreen = ({ navigation, route }) => {
 					const report = await getReport(lat, lng, postcode);
 
 					//save response with address to async storage
+					await saveReport({ ...report, address });
+
+					console.log(JSON.stringify(reports));
 
 					navigation.navigate(screens.SEARCH_RESULTS, { report });
 				} else {
 					//Error here?
 				}
 			} catch (e) {
+				console.log("error", e);
 				setIsError(true);
 			}
 

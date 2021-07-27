@@ -11,6 +11,10 @@ import LabeledValue from "./LabeledValue";
 import SchoolsModal from "./SchoolsModal";
 
 const SchoolsCard = ({ schools }) => {
+	if (!schools?.data) {
+		return null;
+	}
+
 	const { state, independent } = schools.data;
 	const [stateSchoolsModalOpen, setStateSchoolsModalOpen] = useState(false);
 	const [independentSchoolsModalOpen, setIndependentSchoolsModalOpen] = useState(false);

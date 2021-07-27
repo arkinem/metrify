@@ -43,7 +43,7 @@ export default function SearchScreen({ navigation }) {
 		<Screen title={"Check location"}>
 			<TextHeading>Property address</TextHeading>
 			<Input>
-				<AddressButton onPress={() => navigation.navigate("AddressModal")}>
+				<AddressButton onPress={() => navigation.navigate(screens.ADDRESS_MODAL)}>
 					<LightText>{form.location?.description || "Tap to select"}</LightText>
 				</AddressButton>
 				{form.location && (

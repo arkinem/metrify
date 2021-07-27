@@ -1,26 +1,25 @@
 import React from "react";
+import { ActivityIndicator } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Text } from "@ui-kitten/components";
 import styled from "styled-components/native";
 
 import Screen from "../../components/Screen";
 import theme from "../../constants/theme";
-import { t } from "../../lib/i18n/helpers";
 import Report from "../../components/Report";
-import { screens } from "../../constants/navigation";
 
-const SearchResultsScreen = ({ navigation, route }) => {
+const ReportScreen = ({ route, navigation }) => {
 	const { report } = route.params;
 
 	return (
 		<Screen plainView noBackground noPadding>
 			<Heading>
-				<BackButton onPress={() => navigation.navigate(screens.SEARCH)}>
+				<BackButton onPress={() => navigation.goBack()}>
 					<AntDesign name="arrowleft" size={40} color="black" />
 				</BackButton>
-				<Title category="h4">{t("searchResultsScreen.title")}</Title>
+				<Title category="h4">{report.address}</Title>
 			</Heading>
-			<Content showsVerticalScrollIndicator={false}>
+			<Content>
 				<Report report={report} />
 			</Content>
 		</Screen>
@@ -29,7 +28,7 @@ const SearchResultsScreen = ({ navigation, route }) => {
 
 const Heading = styled.View`
 	flex-direction: column;
-	width: 100%;
+	width: 90%;
 	padding-top: 50px;
 	margin: 15px 20px 0 20px;
 `;
@@ -41,8 +40,7 @@ const BackButton = styled.TouchableOpacity`
 
 const Title = styled(Text)`
 	font-family: ${theme.fonts.heading};
-	margin-bottom: 10px;
-	width: 90%;
+	margin-bottom: 16px;
 `;
 
 const Content = styled.ScrollView.attrs(() => ({
@@ -51,21 +49,8 @@ const Content = styled.ScrollView.attrs(() => ({
 		paddingHorizontal: 16,
 		paddingTop: 5,
 	},
-}))``;
-
-const Message = styled(Text)`
-	color: ${theme.colors.textSemiDark};
-	width: 100%;
-	text-align: center;
-	font-family: ${theme.fonts.regular};
+}))`
+	flex: 1;
 `;
 
-const Card = styled.View`
-	width: 100%;
-	padding: 10px;
-	border: 4px solid ${theme.colors.textSemiDark};
-	border-radius: 20px;
-	margin-bottom: 20px;
-`;
-
-export default SearchResultsScreen;
+export default ReportScreen;

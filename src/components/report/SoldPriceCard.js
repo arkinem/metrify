@@ -9,6 +9,10 @@ import LabeledValue from "./LabeledValue";
 import Card from "./Card";
 
 const SoldPriceCard = ({ soldPricesPerSqf }) => {
+	if (!soldPricesPerSqf?.data) {
+		return null;
+	}
+
 	const { data } = soldPricesPerSqf;
 
 	const { points_analysed, radius, average } = data;

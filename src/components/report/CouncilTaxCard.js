@@ -9,6 +9,10 @@ import LabeledValue from "./LabeledValue";
 import theme from "../../constants/theme";
 
 const CouncilTaxCard = ({ councilTax }) => {
+	if (!councilTax) {
+		return null;
+	}
+
 	const { council, council_rating, year, annual_change, note } = councilTax;
 	const bands = councilTax.council_tax;
 

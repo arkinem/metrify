@@ -1,11 +1,10 @@
-import { Button, Divider, List, ListItem, Text } from "@ui-kitten/components";
+import { Button, List, Text } from "@ui-kitten/components";
 import React from "react";
-import { Modal, View } from "react-native";
-
+import { Modal } from "react-native";
 import styled from "styled-components/native";
+
 import theme from "../../constants/theme";
 import { t } from "../../lib/i18n/helpers";
-import LabeledValue from "./LabeledValue";
 
 const RestaurantsModal = ({ restaurants, isOpen, onClose }) => {
 	const renderItem = ({ item, index }) => {
@@ -18,43 +17,13 @@ const RestaurantsModal = ({ restaurants, isOpen, onClose }) => {
 				<Label>{address} </Label>
 				<Label>{item.type} </Label>
 			</ListRow>
-			// <ListItem title={item.name} description={description}>
-			// 	{/* <Label>{item.type}</Label> */}
-			// </ListItem>
-			// <View style={{ backgroundColor: "white", paddingTop: 6 }}>
-			// 	<SubTitle category="h6">{item.name}</SubTitle>
-			// 	{item.type ? <LabeledValue label={t("report.schools.type")} value={item.type} /> : null}
-			// 	{phase ? <LabeledValue label={t("report.schools.phase")} value={phase} /> : null}
-			// 	{item.rating ? (
-			// 		<LabeledValue label={t("report.schools.rating")} value={item.rating} />
-			// 	) : null}
-			// 	{item.num_pupils ? (
-			// 		<LabeledValue label={t("report.schools.pupils")} value={item.num_pupils} />
-			// 	) : null}
-			// 	{item.gender ? (
-			// 		<LabeledValue label={t("report.schools.gender")} value={item.gender} />
-			// 	) : null}
-
-			// 	{index + 1 !== schools.length ? <Divider /> : null}
-			// </View>
 		);
 	};
 
 	return (
 		<Modal animationType="slide" transparent={true} visible={isOpen} onRequestClose={onClose}>
 			<Container>
-				<Contentcontainer
-					style={{
-						shadowColor: "#000",
-						shadowOffset: {
-							width: 0,
-							height: 2,
-						},
-						shadowOpacity: 0.25,
-						shadowRadius: 4,
-						elevation: 5,
-					}}
-				>
+				<Contentcontainer style={theme.shadow}>
 					<SubTitle category="h4">{t("report.restaurants.modal.title")}</SubTitle>
 					<RestaurantsList
 						showsVerticalScrollIndicator={false}
