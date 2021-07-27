@@ -5,7 +5,14 @@ import Header from "./Header";
 import Svg, { Path } from "react-native-svg";
 import theme from "../constants/theme";
 
-export default function Screen({ title, headerProps, children, noBackground, plainView }) {
+export default function Screen({
+	title,
+	headerProps,
+	children,
+	noBackground,
+	plainView,
+	noPadding,
+}) {
 	return (
 		<Container>
 			{title && <Header title={title} {...headerProps} />}
@@ -26,18 +33,22 @@ export default function Screen({ title, headerProps, children, noBackground, pla
 			{plainView ? (
 				<ContentView
 					noBackground={noBackground}
-					style={{ paddingHorizontal: 20, paddingVertical: 15 }}
+					style={noPadding ? null : { paddingHorizontal: 20, paddingVertical: 15 }}
 				>
 					{children}
 				</ContentView>
 			) : (
 				<ContentScrollView
 					noBackground={noBackground}
-					contentContainerStyle={{
-						paddingHorizontal: 20,
-						paddingVertical: 15,
-						flex: 1,
-					}}
+					contentContainerStyle={
+						noPadding
+							? null
+							: {
+									paddingHorizontal: 20,
+									paddingVertical: 15,
+									flex: 1,
+							  }
+					}
 				>
 					{children}
 				</ContentScrollView>

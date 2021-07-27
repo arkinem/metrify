@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components/native";
-import Screen from "./Screen";
 import { Input, Divider, List, ListItem, Text } from "@ui-kitten/components";
-import useDebounce from "../hooks/useDebounce";
-import { getPlacesAutoComplete } from "../services/places";
 import { AntDesign } from "@expo/vector-icons";
+
 import { t } from "../lib/i18n/helpers";
+import useDebounce from "../hooks/useDebounce";
+import Screen from "./Screen";
+import { getPlacesAutoComplete } from "../services/places";
 import useReportForm from "../hooks/useReportForm";
 import theme from "../constants/theme";
 

@@ -17,3 +17,20 @@ export const getData = async (storageKey) => {
 		console.log("getData error", e);
 	}
 };
+
+export const mergeData = async (storageKey, value) => {
+	try {
+		const jsonValue = JSON.stringify(value);
+		await AsyncStorage.mergeItem(storageKey, jsonValue);
+	} catch (e) {
+		console.log("mergeData error", e);
+	}
+};
+
+export const removeData = async (storageKey) => {
+	try {
+		await AsyncStorage.removeItem(storageKey);
+	} catch (e) {
+		console.log("mergeData error", e);
+	}
+};
