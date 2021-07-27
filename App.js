@@ -1,13 +1,14 @@
 import * as React from "react";
-import * as eva from "@eva-design/eva";
+import { useFonts } from "expo-font";
+import AppLoading from 'expo-app-loading';
 import { StatusBar } from "expo-status-bar";
+import * as eva from "@eva-design/eva";
 import { ApplicationProvider } from "@ui-kitten/components";
+
 import AppNavigation from "./src/navigation/AppNavigation";
 import { default as theme } from "./src/constants/theme.json";
 import { ReportFormProvider } from "./src/hooks/useReportForm";
-import AppLoading from "expo-app-loading";
 import { appFonts } from "./src/constants/fonts";
-import { useFonts } from "expo-font";
 import { PreferencesProvider } from "./src/hooks/usePreferences";
 import { ReportsProvider } from "./src/hooks/useReports";
 
