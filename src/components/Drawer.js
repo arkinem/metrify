@@ -5,16 +5,18 @@ import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { Text } from "@ui-kitten/components";
 import theme from "../constants/theme";
 import { Feather } from "@expo/vector-icons";
+import { screens } from "../constants/navigation";
+
 const { colors, fonts } = theme;
 
-export default function Drawer({ state, navigation, ...props }) {
+const Drawer = ({ state, navigation, ...props }) => {
 	const { routes, index } = state;
 	const activeItem = routes[index]?.name;
 
-	const DrawerItem = ({ name, iconName }) => {
+	const DrawerItem = ({ name, iconName, navigationPath }) => {
 		const active = activeItem === name;
 		return (
-			<NavOption activeOpacity={0.7} onPress={() => navigation.navigate(name)}>
+			<NavOption activeOpacity={0.7} onPress={() => navigation.navigate(navigationPath)}>
 				<Icon name={iconName} size={30} color={active ? colors.primaryLight : colors.textDark} />
 				<NavOptionLabel active={active} category="h4">
 					{name}
@@ -26,13 +28,13 @@ export default function Drawer({ state, navigation, ...props }) {
 	return (
 		<DrawerContentScrollView state={state} navigation={navigation} {...props}>
 			<Container>
-				<DrawerItem name="Search" iconName={"search"} />
-				<DrawerItem name="Reports" iconName={"file-text"} />
-				<DrawerItem name="Preferences" iconName={"settings"} />
+				<DrawerItem name="Search" iconName={"search"} navigationPath={screens.SEARCH} />
+				<DrawerItem name="Reports" iconName={"file-text"} navigationPath={screens.REPORTS} />
+				<DrawerItem name="Preferences" iconName={"settings"} navigationPath={screens.PREFERENCES} />
 			</Container>
 		</DrawerContentScrollView>
 	);
-}
+};
 
 const Container = styled.View`
 	margin-top: ${Constants.statusBarHeight}px;
@@ -57,3 +59,5 @@ const NavOptionLabel = styled(Text)`
 const Icon = styled(Feather)`
 	width: 45px;
 `;
+
+export default Drawer;

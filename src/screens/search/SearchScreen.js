@@ -9,25 +9,34 @@ import TextHeading from "../../components/TextHeading";
 import useReportForm from "../../hooks/useReportForm";
 import { getReport } from "../../services/report";
 import { addressToCoords } from "../../services/geocode";
+import { findPostcode } from "../../services/postcode";
+import { screens } from "../../constants/navigation";
 
 export default function SearchScreen({ navigation }) {
 	const form = useReportForm();
 	const [imageContainerSize, setImageContainerSize] = useState({ height: 0, width: 0 });
 
+	const submitButtonEnabled = !!form.location?.description;
 	const onSubmit = async () => {
-		try {
-			const address = form.location?.description;
-			const coords = await addressToCoords(address);
-			const { lat, lng } = coords?.results[0]?.geometry?.location;
-			if (lat && lng) {
-				const response = await getReport(lat, lng);
-				console.log(response);
-			} else {
-				//Error here?
-			}
-		} catch (e) {
-			console.log("onSubmit", e);
-		}
+		const address = form.location?.description;
+		navigation.navigate(screens.SEARCH_RESULT_NAVIGATION, {
+			screen: screens.SEARCH_LOADING,
+			params: { address },
+		});
+		// try {
+		// 	const coords = await addressToCoords(address);
+		// 	const { lat, lng } = coords?.results[0]?.geometry?.location;
+		// 	const postcode = await findPostcode(lat, lng);
+
+		// 	if (lat && lng && postcode) {
+		// 		const response = await getReport(lat, lng, postcode);
+		// 		console.log(response);
+		// 	} else {
+		// 		//Error here?
+		// 	}
+		// } catch (e) {
+		// 	console.log("onSubmit", e);
+		// }
 	};
 
 	return (
@@ -68,9 +77,11 @@ export default function SearchScreen({ navigation }) {
 					<LightText>Include average prices information</LightText>
 				</ToggleButton>
 			</OptionsContainer>
-			<SubmitButton activeOpacity={0.75} onPress={onSubmit}>
-				<TextHeading noMargin>Get report</TextHeading>
-			</SubmitButton>
+			{submitButtonEnabled && (
+				<SubmitButton activeOpacity={0.75} onPress={onSubmit}>
+					<TextHeading noMargin>Get report</TextHeading>
+				</SubmitButton>
+			)}
 			<LogoContainer
 				onLayout={(e) => {
 					const { width, height } = e.nativeEvent.layout;

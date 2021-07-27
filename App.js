@@ -5,7 +5,7 @@ import { ApplicationProvider } from "@ui-kitten/components";
 import AppNavigation from "./src/navigation/AppNavigation";
 import { default as theme } from "./src/constants/theme.json";
 import { ReportFormProvider } from "./src/hooks/useReportForm";
-import { AppLoading } from "expo";
+import AppLoading from "expo-app-loading";
 import { appFonts } from "./src/constants/fonts";
 import { useFonts } from "expo-font";
 import { PreferencesProvider } from "./src/hooks/usePreferences";
